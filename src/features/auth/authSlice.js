@@ -38,6 +38,7 @@ export const fetchTokenAsync = createAsyncThunk('auth/fetchToken', async () => {
 export const authenticationAsync = createAsyncThunk(
   'auth/authentication',
   async (credentials) => {
+    console.log('auth csrfToken:',credentials.csrfToken)
     const res = await fetch(C.URL + '/api/v1/login', {
       method: 'POST',
       mode: 'cors',
