@@ -35,29 +35,29 @@ export const fetchTokenAsync = createAsyncThunk('auth/fetchToken', async () => {
   return data
 })
 
-export const authenticationAsync = createAsyncThunk(
-  'auth/authentication',
-  async (credentials) => {
-    console.log('auth csrfToken:',credentials.csrfToken)
-    const res = await fetch(C.URL + '/api/v1/login', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        'CSRF-Token': credentials.csrfToken,
-      },
-      redirect: 'follow',
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    })
-    const data = await res.json()
-    return data
-  }
-)
+// export const authenticationAsync = createAsyncThunk(
+//   'auth/authentication',
+//   async (credentials) => {
+//     console.log('auth csrfToken:',credentials.csrfToken)
+//     const res = await fetch(C.URL + '/api/v1/login', {
+//       method: 'POST',
+//       mode: 'cors',
+//       cache: 'no-cache',
+//       credentials: 'include',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'CSRF-Token': credentials.csrfToken,
+//       },
+//       redirect: 'follow',
+//       body: JSON.stringify({
+//         email: credentials.email,
+//         password: credentials.password,
+//       }),
+//     })
+//     const data = await res.json()
+//     return data
+//   }
+// )
 
 export const signUp = createAsyncThunk('auth/signUp', async (credentials) => {
   const res = await fetch(C.URL + '/api/v1/users', {
@@ -126,11 +126,17 @@ export const authSlice = createSlice({
     successAuthentication: (state) => {
       state.isAuthentication = true
     },
-    setToken: (state, action) => {
-      state.token = action.payload
+    setToken: (state) => {
+      console.log(sessionStorage.token)
+      if(sessionStorage.token){
+
+        state.token = sessionStorage.token
+        state.isAuthentication = true
+      }
     },
     clearToken: (state) => {
       state.token = ''
+      sessionStorage.clear()
       state.isAuthentication = false
     },
     toggleSignUp: (state) => {
@@ -156,22 +162,24 @@ export const authSlice = createSlice({
         }
         state.tokenFetchState = 'idle'
       })
-      .addCase(authenticationAsync.pending, (state) => {
-        state.authenticationState = 'loading'
-      })
-      .addCase(authenticationAsync.fulfilled, (state, action) => {
-        if (action.payload.isSuccess) {
-          state.token = action.payload.token
-          state.isAuthentication = true
-        }
-        state.authenticationState = 'idle'
-      })
+      // .addCase(authenticationAsync.pending, (state) => {
+      //   state.authenticationState = 'loading'
+      // })
+      // .addCase(authenticationAsync.fulfilled, (state, action) => {
+      //   if (action.payload.isSuccess) {
+      //     state.token = action.payload.token
+      //     state.isAuthentication = true
+      //   }
+      //   state.authenticationState = 'idle'
+      // })
       .addCase(postAuthenticationAsync.pending, (state) => {
         state.postAuthenticationState = 'loading'
       })
       .addCase(postAuthenticationAsync.fulfilled, (state, action) => {
         if (action.payload.isSuccess) {
+          console.log('called')
           state.token = action.payload.token
+          sessionStorage.token = action.payload.token
           state.isAuthentication = true
         } else {
           console.log(action.payload)
@@ -187,6 +195,7 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.token = ''
+        sessionStorage.clear()
         state.isAuthentication = false
         state.logoutState = 'idle'
       })
