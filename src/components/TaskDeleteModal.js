@@ -1,10 +1,10 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef, useState, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { Dialog, Transition } from '@headlessui/react'
 import { TrashIcon } from '@heroicons/react/outline'
 import { deleteTaskAsync } from '../features/tasks/tasksSlice'
 
-const TaskDeleteModal = ({ setDeleteModalOn, credentials }) => {
+const NoMemoTaskDeleteModal = ({ setDeleteModalOn, credentials }) => {
   const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null)
   const dispatch = useDispatch()
@@ -111,4 +111,4 @@ const TaskDeleteModal = ({ setDeleteModalOn, credentials }) => {
   )
 }
 
-export default TaskDeleteModal
+export const TaskDeleteModal = memo(NoMemoTaskDeleteModal)

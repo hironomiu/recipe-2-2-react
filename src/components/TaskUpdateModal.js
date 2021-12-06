@@ -1,10 +1,10 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef, useState, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { Dialog, Transition } from '@headlessui/react'
 import { RefreshIcon } from '@heroicons/react/outline'
 import { updateTaskAsync } from '../features/tasks/tasksSlice'
 
-const TaskUpdateModal = ({ setUpdateModalOn, credentials }) => {
+const NoMemoTaskUpdateModal = ({ setUpdateModalOn, credentials }) => {
   const [open, setOpen] = useState(true)
   const [taskState, setTaskState] = useState({
     id: credentials.task.id,
@@ -165,4 +165,4 @@ const TaskUpdateModal = ({ setUpdateModalOn, credentials }) => {
   )
 }
 
-export default TaskUpdateModal
+export const TaskUpdateModal = memo(NoMemoTaskUpdateModal)
