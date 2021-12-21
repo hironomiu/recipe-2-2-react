@@ -13,5 +13,5 @@ yarn install
 `.env` を配置しAPIサーバのURLを記述(開発時は`http://localhost:5000`)
 
 ```
-REACT_APP_URL=''
+REACT_APP_URL='http://localhost:5000'
 ```
