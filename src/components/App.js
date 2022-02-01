@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect,memo } from 'react'
 
 import Layout from './Layout'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import {
   selectCsrfTokenState,
 } from '../features/auth/authSlice'
 
-const App = () => {
+const App = memo(() => {
   const dispatch = useDispatch()
   const csrfToken = useSelector(selectCsrfTokenState)
   useEffect(() => {
@@ -23,6 +23,6 @@ const App = () => {
       <Layout />
     </>
   )
-}
+})
 
 export default App

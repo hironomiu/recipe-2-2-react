@@ -1,10 +1,10 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef, useState ,memo} from 'react'
 import { useDispatch } from 'react-redux'
 import { Dialog, Transition } from '@headlessui/react'
 import { RefreshIcon } from '@heroicons/react/outline'
 import { insertTaskAsync } from '../features/tasks/tasksSlice'
 
-const TaskInsertModal = ({ setInsertModalOn, credentials }) => {
+const TaskInsertModal = memo(({ setInsertModalOn, credentials }) => {
   const [open, setOpen] = useState(true)
   const [taskState, setTaskState] = useState({
     title: '',
@@ -161,6 +161,6 @@ const TaskInsertModal = ({ setInsertModalOn, credentials }) => {
       </Dialog>
     </Transition.Root>
   )
-}
+})
 
 export default TaskInsertModal

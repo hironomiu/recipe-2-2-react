@@ -1,8 +1,9 @@
+import {memo} from 'react'
 import { useSelector } from 'react-redux'
 import { selectTasksState } from '../features/tasks/tasksSlice'
 import Task from './Task'
 
-const TaskList = () => {
+const TaskList = memo(() => {
   const tasks = useSelector(selectTasksState)
 
   if(!tasks.length) return <></>
@@ -27,6 +28,6 @@ const TaskList = () => {
       </table>
     </>
   )
-}
+})
 
 export default TaskList

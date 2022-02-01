@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState ,memo} from 'react'
 import { useSelector } from 'react-redux'
 import Main from './Main'
 import { Header } from './Header'
@@ -10,7 +10,7 @@ import {
   selectIsSignUp,
 } from '../features/auth/authSlice'
 
-const Layout = () => {
+const Layout = memo(() => {
   const isLogin = useSelector(selectIsAuthentication)
   const isSignUp = useSelector(selectIsSignUp)
   const [user, setUser] = useState({
@@ -30,6 +30,6 @@ const Layout = () => {
       <Footer />
     </div>
   )
-}
+})
 
 export default Layout

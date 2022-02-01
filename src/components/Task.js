@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState,memo } from 'react'
 import { useSelector } from 'react-redux'
 import { selectCsrfTokenState } from '../features/auth/authSlice'
 import { TaskDeleteModal } from './TaskDeleteModal'
 import { TaskUpdateModal } from './TaskUpdateModal'
 
-const Task = ({ task }) => {
+const Task = memo(({ task }) => {
   const csrfToken = useSelector(selectCsrfTokenState)
   const [updateModalOn, setUpdateModalOn] = useState(false)
   const [deleteModalOn, setDeleteModalOn] = useState(false)
@@ -57,6 +57,6 @@ const Task = ({ task }) => {
       </tr>
     </>
   )
-}
+})
 
 export default Task

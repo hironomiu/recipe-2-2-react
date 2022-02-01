@@ -1,10 +1,10 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef, useState,memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Dialog, Transition } from '@headlessui/react'
 import { LogoutIcon } from '@heroicons/react/outline'
 import { selectCsrfTokenState, logout } from '../features/auth/authSlice'
 
-const Modal = ({ setModalOn }) => {
+const Modal = memo(({ setModalOn }) => {
   const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null)
   const csrfToken = useSelector(selectCsrfTokenState)
@@ -105,6 +105,6 @@ const Modal = ({ setModalOn }) => {
       </Dialog>
     </Transition.Root>
   )
-}
+})
 
 export default Modal

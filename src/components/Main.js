@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState ,memo} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectTokenState,
@@ -13,7 +13,7 @@ import {
 import TaskList from './TaskList'
 import TaskInsertModal from './TaskInsertModal'
 
-const Main = () => {
+const Main = memo(() => {
   const dispatch = useDispatch()
   const token = useSelector(selectTokenState)
   const csrfToken = useSelector(selectCsrfTokenState)
@@ -45,6 +45,6 @@ const Main = () => {
       ) : null}
     </div>
   )
-}
+})
 
 export default Main
