@@ -1,4 +1,4 @@
-import { useEffect, useState ,memo} from 'react'
+import { useEffect, useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectTokenState,
@@ -27,8 +27,9 @@ const Main = memo(() => {
   }, [dispatch, token, deleteTaskState, updateTaskState, insertTaskState])
 
   return (
-    <div className="block my-5 mx-5">
+    <div className="flex flex-col flex-1 items-center my-5 mx-5">
       <TaskList />
+
       <div className="mt-2 mb-5">
         <button
           className="bg-gray-600 text-white py-3 px-6 text-l rounded"
