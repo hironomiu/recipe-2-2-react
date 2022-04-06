@@ -1,4 +1,4 @@
-import { useState,memo } from 'react'
+import { useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { selectCsrfTokenState } from '../features/auth/authSlice'
 import { TaskDeleteModal } from './TaskDeleteModal'
@@ -27,6 +27,7 @@ const Task = memo(({ task }) => {
             onClick={() => {
               setUpdateModalOn(true)
             }}
+            data-testid="update-btn"
           >
             修正
           </button>
@@ -37,6 +38,7 @@ const Task = memo(({ task }) => {
             onClick={() => {
               setDeleteModalOn(true)
             }}
+            data-testid="delete-btn"
           >
             削除
           </button>

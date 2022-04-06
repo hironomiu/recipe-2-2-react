@@ -14,7 +14,12 @@ let store = configureStore({
 
 describe('Task', () => {
   it('Task', () => {
-    const dummyTask = { id: 1, title: 'dummy title 1', task: 'dummy task 1' }
+    const dummyTask = {
+      id: 1,
+      title: 'dummy title 1',
+      status_name: '未着手',
+      task: 'dummy task 1',
+    }
     render(
       <Provider store={store}>
         <table>
@@ -26,5 +31,10 @@ describe('Task', () => {
     )
     expect(screen.getByText('dummy title 1')).toBeInTheDocument()
     expect(screen.getByText('dummy task 1')).toBeInTheDocument()
+    expect(screen.getByText('未着手')).toBeInTheDocument()
+    expect(screen.getByTestId('update-btn')).toBeInTheDocument()
+    expect(screen.getByText('修正')).toBeInTheDocument()
+    expect(screen.getByTestId('delete-btn')).toBeInTheDocument()
+    expect(screen.getByText('削除')).toBeInTheDocument()
   })
 })
