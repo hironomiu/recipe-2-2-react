@@ -58,7 +58,7 @@ const NoMemoSignUp = ({ user, setUser }) => {
         <div className="flex items-left flex-col">
           <button
             type="button"
-            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+            className="bg-gray-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded disabled:bg-gray-100"
             onClick={(e) => {
               e.preventDefault()
               dispatch(
@@ -70,6 +70,7 @@ const NoMemoSignUp = ({ user, setUser }) => {
                 })
               )
             }}
+            disabled={!user.name || !user.email || !user.password}
           >
             SignUp
           </button>
@@ -80,6 +81,7 @@ const NoMemoSignUp = ({ user, setUser }) => {
                 dispatch(toggleSignUp())
               }}
               data-testid="to-login-span"
+              className="hover:cursor-pointer"
             >
               Switch Login?(CLICK!!)
             </span>

@@ -20,5 +20,6 @@ describe('Login', () => {
         <Login user={'user'} setUser={setUser} />
       </Provider>
     )
+    expect(screen.getByText('Login')).toBeInTheDocument()
   })
 })
