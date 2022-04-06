@@ -6,7 +6,7 @@ import Task from './Task'
 const TaskList = memo(() => {
   const tasks = useSelector(selectTasksState)
 
-  if (!tasks.length) return <></>
+  if (!tasks.length) return <div data-testid="task-list-null"></div>
 
   return (
     <div className="flex flex-col items-center overflow-y-scroll">
