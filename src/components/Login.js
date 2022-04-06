@@ -68,6 +68,8 @@ const NoMemoLogin = ({ user, setUser, setIsSignUp }) => {
                 e.preventDefault()
                 dispatch(toggleSignUp())
               }}
+              data-testid="to-sign-up-span"
+              className="hover:cursor-pointer"
             >
               Switch SignUp?(CLICK!!)
             </span>

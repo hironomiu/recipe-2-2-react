@@ -1,10 +1,11 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../features/auth/authSlice'
 import tasksReducer from '../features/tasks/tasksSlice'
 import App from '../components/App'
+import userEvent from '@testing-library/user-event'
 
 let store = configureStore({
   reducer: {
@@ -14,7 +15,7 @@ let store = configureStore({
 })
 
 describe('App', () => {
-  it('renders learn react link', () => {
+  it('renders learn react link', async () => {
     const { getByText } = render(
       <Provider store={store}>
         <App />
@@ -22,5 +23,7 @@ describe('App', () => {
     )
 
     expect(getByText('Super Web Site')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('to-sign-up-span'))
+    expect(await screen.findByText('SignUp')).toBeInTheDocument()
   })
 })
