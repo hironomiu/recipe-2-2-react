@@ -79,6 +79,7 @@ const NoMemoSignUp = ({ user, setUser }) => {
                 e.preventDefault()
                 dispatch(toggleSignUp())
               }}
+              data-testid="to-login-span"
             >
               Switch Login?(CLICK!!)
             </span>

@@ -23,7 +23,9 @@ describe('App', () => {
     )
 
     expect(getByText('Super Web Site')).toBeInTheDocument()
-    userEvent.click(screen.getByTestId('to-sign-up-span'))
+    userEvent.click(screen.getByTestId('to-signup-span'))
     expect(await screen.findByText('SignUp')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('to-login-span'))
+    expect(await screen.getByText('Login')).toBeInTheDocument()
   })
 })
